@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.cursoudemy.cursomc.domain.Categoria;
+import com.cursoudemy.cursomc.dto.CategoriaDTO;
 import com.cursoudemy.cursomc.repositories.CategoriaRepository;
 import com.cursoudemy.cursomc.services.exceptions.DataIntegratyException;
 import com.cursoudemy.cursomc.services.exceptions.ObjectNotFoundException;
@@ -54,5 +55,9 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer limesPerPage, String ordemBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, limesPerPage,Direction.valueOf(direction), ordemBy);
 		return repo.findAll(pageRequest); 
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(),objDTO.getNome());
 	}
 }
